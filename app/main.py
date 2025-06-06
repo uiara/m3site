@@ -1,14 +1,29 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from app.routes import products
+from flask import Flask, render_template
 
-app = FastAPI()
-templates = Jinja2Templates(directory="app/templates")
+app = Flask(__name__)
 
-app.include_router(products.router)
+# Lista de produtos fictícios (você pode substituir por um banco de dados depois)
+produtos = [
+    {
+        "nome": "Shampoo Hidratante",
+        "preco": "29,90",
+        "imagem": "/static/produtos/shampoo.jpg"
+    },
+    {
+        "nome": "Máscara Capilar",
+        "preco": "39,90",
+        "imagem": "/static/produtos/mascara.jpg"
+    },
+    {
+        "nome": "Kit Reconstrução",
+        "preco": "89,90",
+        "imagem": "/static/produtos/kit.jpg"
+    }
+]
 
-@app.get("/", response_class=HTMLResponse)
-async def home(request: Request):
-    produtos = products.get_all_products()  # Simulação
-    return templates.TemplateResponse("index.html", {"request": request, "produtos": produtos})
+@app.route('/')
+def index():
+    return render_template('index.html', produtos=produtos)
+
+if __name__ == '__main__':
+    app.run(debug=True)
