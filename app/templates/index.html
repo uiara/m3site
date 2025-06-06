@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>M3 Cosméticos</title>
+  <meta name="description" content="Loja M3 Cosméticos: beleza, promoção e qualidade em um só lugar.">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="/static/logo.png" alt="M3 Cosméticos">
+    </div>
+    <h1>M3 Cosméticos</h1>
+  </header>
+
+  <section class="produtos">
+    {% for produto in produtos %}
+    <div class="card">
+      <img src="{{ produto.imagem }}" alt="{{ produto.nome }}">
+      <h2>{{ produto.nome }}</h2>
+      <p class="preco">R$ {{ produto.preco }}</p>
+      <a class="botao" href="https://wa.me/5581999999999?text=Olá! Quero o {{ produto.nome }}." target="_blank">Comprar via WhatsApp</a>
+    </div>
+    {% endfor %}
+  </section>
+
+  <footer>
+    <p>&copy; 2025 M3 Cosméticos. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
